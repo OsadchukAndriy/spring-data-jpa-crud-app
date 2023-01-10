@@ -5,10 +5,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
-/**
- * @author Neil Alishev
- */
 @Entity
 @Table(name = "Person")
 public class Person {
@@ -30,6 +28,9 @@ public class Person {
     @NotEmpty(message = "Email should not be empty")
     @Email
     private String email;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
 
     public Person() {
 
@@ -70,6 +71,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override
